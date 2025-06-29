@@ -22,7 +22,7 @@ public class CampServiceImpl implements CampService {
 		return mapper.campTotalPage();
 	}
 	@Override
-	public CampVO campMainList1() {
+	public CampVO campMainList1() { 
 		// TODO Auto-generated method stub
 		return mapper.campMainList1();
 	}

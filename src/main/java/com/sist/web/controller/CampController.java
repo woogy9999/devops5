@@ -16,8 +16,8 @@ public class CampController {
 	@Autowired
 	private CampService cService;
 	
-	@GetMapping("/")
-	public String main_page(@RequestParam(name="page",required = false) String page, Model model)
+	@GetMapping("/camp/list")
+	public String camp_list(@RequestParam(name="page",required = false) String page, Model model)
 	{
 		if(page==null)
 			page="1";
@@ -46,7 +46,8 @@ public class CampController {
 		model.addAttribute("startPage",startPage);
 		model.addAttribute("endPage",endPage);
 		model.addAttribute("totalpage",totalpage);
-		//model.addAttribute("main_html","main/home");
+		model.addAttribute("main_html","camp/list");
+		
 		return "main";
 	}
 }

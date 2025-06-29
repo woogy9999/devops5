@@ -27,13 +27,13 @@ public interface CampMapper {
 	public int campTotalPage ();
 	
 	
-	@Select("SELECT cno, title, poster FROM "
-			+ "(SELECT cno, title, poster FROM CAMP ORDER BY cno ASC) "
-			+ "WHERE cno = 11")
+	@Select("SELECT cno, title, poster,intro FROM "
+			+ "(SELECT cno, title, poster,intro FROM CAMP ORDER BY cno ASC) "
+			+ "WHERE cno = 1237")
 	public CampVO campMainList1();
 	
-	@Select("SELECT cno, title, poster,addr FROM "
-			+ "(SELECT cno, title, poster,addr FROM CAMP ORDER BY cno ASC) "
+	@Select("SELECT cno, title, poster,addr,intro FROM "
+			+ "(SELECT cno, title, poster,addr,intro FROM CAMP ORDER BY cno ASC) "
 			+ "WHERE ROWNUM <= 4")
 	public List<CampVO> campMainList2();
 }
