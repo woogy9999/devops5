@@ -20,38 +20,19 @@ public class MainController {
 	private CampService cService;
 	
 	@GetMapping("/main")
-	public String main_main(@RequestParam(name="page",required = false) String page,Model model)
+	public String main_main(Model model)
 	{
 		
-		if(page==null)
-			page="1";
-		
-		int curpage=Integer.parseInt(page);
-		int rowSize=12;
-		int start=(rowSize*curpage)-(rowSize-1);
-		int end =(rowSize*curpage);
-		
-		
-		Map map=new HashMap();
-		map.put("start", start);
-		map.put("end", end);
-		
-		List<CampVO> list=cService.campListData(map); 
-		int totalpage=cService.campTotalPage();
+		CampVO vo1= cService.campMainList1();
+		List<CampVO> list1=cService.campMainList2();
 		 
-		final int BLOCK=10; 
-		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
-		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
-		if(endPage>totalpage)
-			endPage=totalpage;
 		
-		model.addAttribute("list",list);
-		model.addAttribute("curpage",curpage);
-		model.addAttribute("startPage",startPage);
-		model.addAttribute("endPage",endPage);
-		model.addAttribute("totalpage",totalpage);
+		model.addAttribute("vo1",vo1);
+		model.addAttribute("list1",list1);
 		model.addAttribute("main_html","main/home");
 		return "main";
 	}
+	
+	
 	
 }

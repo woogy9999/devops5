@@ -8,7 +8,7 @@ public class CampVO {
 
     private String title;
     private String intro;
-    private String poster;
+    private String poster;  
     private String managesttus;
     private String hvofbgnde;
     private String hvofenddle;
@@ -25,8 +25,8 @@ public class CampVO {
     private int indvdlcaravsiteco;
 
     private String caravacmpnyat;
-    private String trleracmpnyat;
-    private String animalcmgcl;
+    private String trleracmpnyat; 
+    private String animalcmgcl; 
 
     private int hit;
     private int fcount;

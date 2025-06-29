@@ -20,6 +20,16 @@ public class CampServiceImpl implements CampService {
 	}
 	public int campTotalPage() {
 		return mapper.campTotalPage();
+	}
+	@Override
+	public CampVO campMainList1() {
+		// TODO Auto-generated method stub
+		return mapper.campMainList1();
+	}
+	@Override
+	public List<CampVO> campMainList2() {
+		// TODO Auto-generated method stub
+		return mapper.campMainList2();
 	} 
 	
 }

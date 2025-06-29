@@ -1,6 +1,8 @@
 package com.sist.web.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
 import java.util.*;
 import com.sist.web.vo.*;
 
@@ -23,4 +25,15 @@ public interface CampMapper {
  	</select>
 	 */
 	public int campTotalPage ();
+	
+	
+	@Select("SELECT cno, title, poster FROM "
+			+ "(SELECT cno, title, poster FROM CAMP ORDER BY cno ASC) "
+			+ "WHERE cno = 11")
+	public CampVO campMainList1();
+	
+	@Select("SELECT cno, title, poster,addr FROM "
+			+ "(SELECT cno, title, poster,addr FROM CAMP ORDER BY cno ASC) "
+			+ "WHERE ROWNUM <= 4")
+	public List<CampVO> campMainList2();
 }
