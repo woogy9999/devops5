@@ -43,7 +43,7 @@ jobs:
 
       - name: Deploy on server using DockerHub image
         run: |
-          ssh ubuntu@${{ secrets.IP_ADDRESS }} << 'EOF'
+          ssh ubuntu@${{ secrets.IP_ADDRESS }} << EOF
             sudo docker stop spring-app3 || true
             sudo docker rm spring-app3 || true
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/spring-app3:latest
