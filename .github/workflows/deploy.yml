@@ -33,14 +33,23 @@ jobs:
           docker build -t ${{ secrets.DOCKER_USERNAME }}/spring-app3:latest .
           docker push ${{ secrets.DOCKER_USERNAME }}/spring-app3:latest
 
-      - name: Save SSH private key
+      - name: Save SSH private key safely
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_ed25519
+          printf "%s\n" "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
 
       - name: Add known hosts
         run: ssh-keyscan -t ed25519 ${{ secrets.IP_ADDRESS }} >> ~/.ssh/known_hosts
+
+      - name: DEBUG: show first lines of key
+        run: |
+          echo "🔑 First lines of saved key:"
+          head -n 5 ~/.ssh/id_ed25519
+
+      - name: DEBUG: test SSH connection with -vvv
+        run: |
+          ssh -vvv -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ubuntu@${{ secrets.IP_ADDRESS }} exit
 
       - name: Deploy on server using DockerHub image
         run: |
