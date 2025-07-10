@@ -40,7 +40,11 @@ jobs:
 
       - name: Add known hosts
         run: ssh-keyscan -t ed25519 ${{ secrets.IP_ADDRESS }} >> ~/.ssh/known_hosts
-
+        
+      - name: SSH 연결 테스트
+        run: |
+          ssh -v ubuntu@${{ secrets.IP_ADDRESS }} echo "SSH 연결 성공"
+          
       - name: Deploy on server using DockerHub image
         run: |
           ssh ubuntu@${{ secrets.IP_ADDRESS }} << 'EOF'
