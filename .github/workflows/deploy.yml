@@ -33,19 +33,20 @@ jobs:
           docker build -t ${{ secrets.DOCKER_USERNAME }}/spring-app3:latest .
           docker push ${{ secrets.DOCKER_USERNAME }}/spring-app3:latest
 
-      - name: Add SSH key
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
+      - name: Save SSH private key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
 
       - name: Add known hosts
         run: ssh-keyscan -t ed25519 ${{ secrets.IP_ADDRESS }} >> ~/.ssh/known_hosts
 
       - name: Deploy on server using DockerHub image
         run: |
-          ssh ubuntu@${{ secrets.IP_ADDRESS }} << 'EOF'
-            sudo docker stop spring-app3 || true
-            sudo docker rm spring-app3 || true
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/spring-app3:latest
+          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ubuntu@${{ secrets.IP_ADDRESS }} "
+            sudo docker stop spring-app3 || true &&
+            sudo docker rm spring-app3 || true &&
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/spring-app3:latest &&
             sudo docker run -d --name spring-app3 -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/spring-app3:latest
-          EOF
+          "
