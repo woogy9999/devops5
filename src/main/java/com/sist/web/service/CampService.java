@@ -11,9 +11,17 @@ public interface CampService {
 
 	public List<CampVO> campListData(Map map);
 	
-	public int campTotalPage (); 
+	public int campTotalPage ();  
 	
 	public CampVO campMainList1();
 	public List<CampVO> campMainList2();
+	
+	
+	public CampVO campDetailData(int cno);
+	
+	//검색
+
+	public List<CampVO> campFindData(Map map);
+	public int campFindPage(Map map);
 }
  

@@ -23,25 +23,16 @@
                 <div class="col-7 col-sm-6">
                     <div class="signup-search-area d-flex align-items-center justify-content-end">
                         <div class="login_register_area d-flex">
-                            <div class="login">
-                                <a href="register.html">Sing in</a>
+                            <div class="">
+								<li th:if="${session.id==null}" class="nav-item"><a href="/member/login" class="nav-link">로그인</a></li>
                             </div>
-                            <div class="register">
-                                <a href="register.html">Sing up</a>
+                            <div class="">
+								
+                                <li th:if="${session.id!=null}" class="nav-item">
+									<span class="nav-link" th:text="${session.name} + '님 환영합니다'"></span>
                             </div>
                         </div>
-                        <!-- Search Button Area -->
-                        <div class="search_button">
-                            <a class="searchBtn" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
-                        </div>
-                        <!-- Search Form -->
-                        <div class="search-hidden-form">
-                            <form action="#" method="get">
-                                <input type="search" name="search" id="search-anything" placeholder="Search Anything...">
-                                <input type="submit" value="" class="d-none">
-                                <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
-                            </form>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -71,30 +62,22 @@
                                 <li class="nav-item active">
                                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">회원가입</a>
-                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="index.html">회원가입</a>
-                                        <a class="dropdown-item" href="archive.html">아이디찾기</a>
-                                        <a class="dropdown-item" href="single.html">비밀번호찾기</a>
-                         
-                         
-                            
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">캠핑</a>
-                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="/camp/list">캠핑목록</a>
-                                        <a class="dropdown-item" href="/camp/find">캠핑검색</a>
-                                                      </div>
-                                </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">커뮤니티</a>
+                                    <a class="nav-link" href="/camp/list">캠핑목록</a>
                                 </li>
+								<li class="nav-item">
+                                    <a class="nav-link" href="/camp/find">캠핑검색</a>
+                                </li>
+								<li class="nav-item">
+								    <a class="nav-link" href="#">커뮤니티</a>
+								</li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">예약</a>
                                 </li>
+
+								<li th:if="${session.id==null}" class="nav-item"><a href="/member/login" class="nav-link">로그인</a></li>
+								<li th:if="${session.id!=null}" class="nav-item"><a href="/member/logout" class="nav-link">로그아웃</a></li>
+
                                 
                             </ul>
                         </div>

@@ -7,7 +7,7 @@ import java.util.*;
 import com.sist.web.vo.*;
 
 @Mapper
-public interface CampMapper {
+public interface CampMapper { 
 /*
  * <select id="campListData" resultType="CampVO" parameterType="hashmap">
  		SELECT cno,title,poster,num 
@@ -36,4 +36,41 @@ public interface CampMapper {
 			+ "(SELECT cno, title, poster,addr,intro FROM CAMP ORDER BY cno ASC) "
 			+ "WHERE ROWNUM <= 4")
 	public List<CampVO> campMainList2();
+	
+	@Select("SELECT * FROM CAMP WHERE cno=#{cno}")
+	public CampVO campDetailData(int cno);
+	
+	
+	public List<CampVO> campFindData(Map map);
+	/*
+	 * <select id="campFindData" resultType="CampVO" parameterType="hashmap">
+	    SELECT cno, title, poster, num
+	    FROM (
+	        SELECT cno, title, poster, ROWNUM AS num
+	        FROM (
+	            SELECT cno, title, poster
+	            FROM CAMP
+	            <where>
+	                <if test="keyword != null">
+	                    title LIKE #{keyword}
+	                </if>
+	            </where>
+	            ORDER BY cno ASC
+	        )
+	    )
+	    WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="campTotalPage" resultType="int" parameterType="hashmap">
+	    SELECT CEIL(COUNT(*) / 12.0)
+	    FROM CAMP
+	    <where>
+	        <if test="keyword != null">
+	            title LIKE #{keyword}
+	        </if>
+	    </where>
+	</select>
+
+	 */
+	public int campFindPage(Map map);
 }

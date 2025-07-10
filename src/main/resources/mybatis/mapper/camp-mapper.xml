@@ -4,14 +4,45 @@
  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.sist.web.dao.CampMapper">
  	<select id="campListData" resultType="CampVO" parameterType="hashmap">
- 		SELECT cno,title,poster,num 
- 		FROM (SELECT cno,title,poster,rownum as num 
- 		FROM (SELECT cno,title,poster 
+ 		SELECT cno,title,poster,price,num 
+ 		FROM (SELECT cno,title,poster,price,rownum as num 
+ 		FROM (SELECT cno,title,poster,price 
  		FROM CAMP ORDER BY cno ASC))
  		WHERE num BETWEEN #{start} AND #{end}
  	</select>
  	<select id="campTotalPage" resultType="int">
  		SELECT CEIL(COUNT(*)/12.0) FROM CAMP
  	</select>
+ 	
+ 	
+ 	<select id="campFindData" resultType="CampVO" parameterType="hashmap">
+	    SELECT cno, title, poster,price, num
+	    FROM (
+	        SELECT cno, title, poster,price, ROWNUM AS num
+	        FROM (
+	            SELECT cno, title, poster,price
+	            FROM CAMP
+	            <where>
+	                poster IS NOT NULL
+	                <if test="keyword != null">
+	                    AND title LIKE #{keyword}
+	                </if>
+	            </where>
+	            ORDER BY cno ASC
+	        )
+	    )
+	    WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="campFindPage" resultType="int" parameterType="hashmap">
+	    SELECT CEIL(COUNT(*) / 12.0)
+	    FROM CAMP
+	    <where>
+	        <if test="keyword != null">
+	            title LIKE #{keyword}
+	        </if>
+	    </where>
+	</select>
+
  	
  </mapper>

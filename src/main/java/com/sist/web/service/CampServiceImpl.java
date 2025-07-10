@@ -1,6 +1,7 @@
 package com.sist.web.service;
 
 import java.util.List;
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,19 @@ public class CampServiceImpl implements CampService {
 	public List<CampVO> campMainList2() {
 		// TODO Auto-generated method stub
 		return mapper.campMainList2();
-	} 
+	}
+	@Override
+	public CampVO campDetailData(int cno) {
+		// TODO Auto-generated method stub
+		return mapper.campDetailData(cno); 
+	}
+	public List<CampVO> campFindData(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.campFindData(map);
+	}
+	public int campFindPage(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.campFindPage(map);
+	}  
 	
 }
