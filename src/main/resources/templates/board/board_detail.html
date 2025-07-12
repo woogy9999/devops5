@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ <!-- ****** Footer Social Icon Area Start ****** -->
+ 	<div class="breadcumb-area" style="background-image: url(../img/bg-img/breadcumb.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="bradcumb-title text-center">
+                        <h2>상세 페이지</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 	</div>
+	
+	<main class="container my-5">
+	  <h3 class="mb-4">게시글 상세보기</h3>
+
+	  <div class="table-responsive">
+	    <table class="table table-bordered">
+	      <tbody>
+	        <tr>
+	          <th style="width: 15%;">제목</th>
+	          <td th:text="${vo.subject}"></td>
+	        </tr>
+	        <tr>
+	          <th>작성자</th>
+	          <td th:text="${vo.name}"></td>
+	        </tr>
+	        <tr>
+	          <th>작성일</th>
+	          <td th:text="${vo.regdate}"></td>
+	        </tr>
+	        <tr>
+	          <th>조회수</th>
+	          <td th:text="${vo.hit}"></td>
+	        </tr>
+	        <tr>
+	          <th>내용</th>
+	          <td th:text="${vo.content}" class="pre-line" style="white-space: pre-wrap;"></td>
+	        </tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <div class="text-end mt-3 text-right">
+	    <a class="btn btn-primary me-2 text-right" th:href="@{/board/update(no=${vo.no})}">수정하기</a>
+		<a class="btn btn-primary me-2 text-right" th:href="@{/board/delete(no=${vo.no})}">삭제하기</a>
+	    <a class="btn btn-secondary text-right" href="javascript:history.back()">목록보기</a>
+	  </div>
+	</main>
+
+</body>
